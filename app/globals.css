@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-red: #e31e24;
+  --color-brand-orange: #FF4D00;
+  --color-brand-maroon: #3C0008;
+  --color-brand-blue: #239fed;
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base styles for dark mode overrides, though we will primarily stick to light mode classes for content */
+@media (prefers-color-scheme: dark) {
+
+  /* We allow dark mode body background for now, but individual sections will force bg-white where requested */
+  body {
+    background-color: #0a0a0a;
+    color: #ededed;
+  }
+}
+
+body {
+  background-color: #ffffff;
+  color: #1f2937;
+  /* Tailwind gray-800 */
+}
