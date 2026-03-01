@@ -49,7 +49,7 @@ export default function Header() {
           <div className="max-w-7xl mx-auto flex justify-between items-center px-3 md:px-6 gap-2 md:gap-4">
 
             {/* Logo */}
-            <Link href="/" className="flex flex-row items-center flex-shrink-0 border border-brand-red bg-white h-8 md:h-10">
+            <Link href="/" className="flex flex-row items-center flex-shrink-0 border border-white bg-white h-8 md:h-10">
               <span className="text-lg md:text-2xl text-black px-2 flex items-center h-full" style={{ fontFamily: 'Georgia, serif' }}>
                 sevilla
               </span>
