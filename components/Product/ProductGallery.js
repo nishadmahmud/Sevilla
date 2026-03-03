@@ -1,10 +1,26 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-export default function ProductGallery({ images }) {
-    const [mainImage, setMainImage] = useState(images[0]);
+export default function ProductGallery({ images, mainImage: externalMainImage, onChangeMainImage }) {
+    const [internalMain, setInternalMain] = useState(externalMainImage || images[0]);
+
+    useEffect(() => {
+        if (externalMainImage) {
+            setInternalMain(externalMainImage);
+        }
+    }, [externalMainImage]);
+
+    const mainImage = externalMainImage || internalMain || images[0];
+
+    const handleSetMain = (img) => {
+        if (onChangeMainImage) {
+            onChangeMainImage(img);
+        } else {
+            setInternalMain(img);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-4">
@@ -24,9 +40,10 @@ export default function ProductGallery({ images }) {
                 {images.map((img, idx) => (
                     <button
                         key={idx}
-                        onClick={() => setMainImage(img)}
-                        className={`relative w-20 h-20 shrink-0 rounded-xl border-2 overflow-hidden bg-[#f5f5f5] transition-all ${mainImage === img ? 'border-brand-red' : 'border-transparent hover:border-gray-300'
-                            }`}
+                        onClick={() => handleSetMain(img)}
+                        className={`relative w-20 h-20 shrink-0 rounded-xl border-2 overflow-hidden bg-[#f5f5f5] transition-all ${
+                            mainImage === img ? 'border-brand-red' : 'border-transparent hover:border-gray-300'
+                        }`}
                     >
                         <Image
                             src={img}

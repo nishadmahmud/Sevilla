@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
-export default function Footer() {
+export default function Footer({ categories = [] }) {
+    const dynamicCategories = Array.isArray(categories) ? categories.slice(0, 4) : [];
     return (
         <footer className="bg-brand-red border-t border-brand-red/50 text-white/90 mt-auto">
             <div className="max-w-7xl mx-auto px-3 md:px-6 py-8 md:py-16">
@@ -12,7 +13,7 @@ export default function Footer() {
                     {/* Brand & Contact */}
                     <div className="flex flex-col gap-3 md:gap-6 col-span-2 sm:col-span-1">
                         <Link href="/" className="inline-block">
-                            <div className="flex flex-row items-center flex-shrink-0 border border-white bg-white h-8 w-fit">
+                            <div className="flex flex-row items-center shrink-0 border border-white bg-white h-8 w-fit">
                                 <span className="text-lg text-black px-2 flex items-center h-full" style={{ fontFamily: 'Georgia, serif' }}>
                                     sevilla
                                 </span>
@@ -22,7 +23,7 @@ export default function Footer() {
                             </div>
                         </Link>
                         <p className="text-[10px] md:text-sm leading-relaxed text-white/80">
-                            Bangladesh's most trusted premium kitchen appliances shop.
+                            Bangladesh&apos;s most trusted premium kitchen appliances shop.
                         </p>
                         <div className="flex flex-col gap-1.5 md:gap-2 text-[10px] md:text-sm text-white/90">
                             <p className="flex gap-1 md:gap-2">
@@ -41,15 +42,14 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
+                    {/* Services / Support */}
                     <div className="flex flex-col gap-3 md:gap-6">
-                        <h3 className="text-sm md:text-lg font-bold text-white">Services</h3>
+                        <h3 className="text-sm md:text-lg font-bold text-white">Support</h3>
                         <div className="flex flex-col gap-1.5 md:gap-3 text-[10px] md:text-sm">
-                            <Link href="/services/chimney" className="hover:text-white/70 transition-colors">Chimney Installation</Link>
-                            <Link href="/services/stove" className="hover:text-white/70 transition-colors">Gas Stove Repair</Link>
-                            <Link href="/services/oven" className="hover:text-white/70 transition-colors">Oven Maintenance</Link>
-                            <Link href="/services/hob" className="hover:text-white/70 transition-colors">Hob Servicing</Link>
-                            <Link href="/services/consultation" className="hover:text-white/70 transition-colors">General Consultation</Link>
+                            <Link href="/track-order" className="hover:text-white/70 transition-colors">Track Order</Link>
+                            <Link href="/offer" className="hover:text-white/70 transition-colors">Special Offers</Link>
+                            <Link href="/blog" className="hover:text-white/70 transition-colors">Blog & Tips</Link>
+                            <Link href="/contact" className="hover:text-white/70 transition-colors">Help & Contact</Link>
                         </div>
                     </div>
 
@@ -57,11 +57,16 @@ export default function Footer() {
                     <div className="flex flex-col gap-3 md:gap-6">
                         <h3 className="text-sm md:text-lg font-bold text-white">Shop</h3>
                         <div className="flex flex-col gap-1.5 md:gap-3 text-[10px] md:text-sm">
-                            <Link href="/category/chimneys" className="hover:text-white/70 transition-colors">Kitchen Chimneys</Link>
-                            <Link href="/category/induction" className="hover:text-white/70 transition-colors">Induction Cookers</Link>
-                            <Link href="/category/stoves" className="hover:text-white/70 transition-colors">Gas Stoves</Link>
-                            <Link href="/category/ovens" className="hover:text-white/70 transition-colors">Built-in Ovens</Link>
-                            <Link href="/category/accessories" className="hover:text-white/70 transition-colors">Accessories</Link>
+                            <Link href="/shop" className="hover:text-white/70 transition-colors">All Products</Link>
+                            {dynamicCategories.map((cat) => (
+                                <Link
+                                    key={cat.category_id || cat.id}
+                                    href={`/category/${cat.category_id || cat.id}`}
+                                    className="hover:text-white/70 transition-colors"
+                                >
+                                    {cat.name}
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
@@ -71,10 +76,10 @@ export default function Footer() {
                         <div className="flex flex-col gap-1.5 md:gap-3 text-[10px] md:text-sm">
                             <Link href="/about" className="hover:text-white/70 transition-colors">About Us</Link>
                             <Link href="/contact" className="hover:text-white/70 transition-colors">Contact Us</Link>
-                            <Link href="/track-order" className="text-white font-semibold hover:text-white/70 transition-colors">Track Order</Link>
                             <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
                             <Link href="/terms" className="hover:text-white/70 transition-colors">Terms & Conditions</Link>
                             <Link href="/refund" className="hover:text-white/70 transition-colors">Refund Policy</Link>
+                            <Link href="/warranty" className="hover:text-white/70 transition-colors">Warranty & Service</Link>
                         </div>
                     </div>
 
@@ -85,11 +90,11 @@ export default function Footer() {
             <div className="border-t border-white/10 bg-gray-900">
                 <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-[9px] md:text-xs font-medium text-gray-400">
                     <p>&copy; {new Date().getFullYear()} sevilla. All rights reserved.</p>
-                    <div className="flex gap-4 md:gap-6">
-                        <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                        <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-                        <Link href="/refund" className="hover:text-white transition-colors">Refund</Link>
-                    </div>
+                        <div className="flex gap-4 md:gap-6">
+                            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+                            <Link href="/refund" className="hover:text-white transition-colors">Refund</Link>
+                        </div>
                 </div>
             </div>
         </footer>

@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Hero() {
+export default function Hero({ slides: apiSlides = [] }) {
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const slides = [
+    const defaultSlides = [
         {
             id: 1,
             badge: "Premium Italian Design",
@@ -37,6 +37,8 @@ export default function Hero() {
         }
     ];
 
+    const slides = apiSlides && apiSlides.length ? apiSlides : defaultSlides;
+
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -52,31 +54,20 @@ export default function Hero() {
                         key={slide.id}
                         className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${currentSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                     >
-                        <Image
-                            src={slide.imageUrl}
-                            alt={slide.title}
-                            fill
-                            unoptimized
-                            className="object-cover object-center z-0"
-                            priority={idx === 0}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10 z-10"></div>
-                        <div className="relative z-20 flex flex-col items-start justify-center h-full text-left px-5 md:px-16 lg:px-24">
-                            <div className="bg-brand-red text-white font-bold py-0.5 px-2 mb-2 md:mb-3 rounded-full text-[8px] md:text-[10px] uppercase tracking-wider shadow-sm">
-                                {slide.badge}
-                            </div>
-                            <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-white leading-snug mb-1 md:mb-2 drop-shadow-md max-w-lg">
-                                {slide.title}
-                            </h2>
-                            <p className="text-[10px] sm:text-xs md:text-sm text-gray-200 mb-3 md:mb-6 max-w-md drop-shadow leading-relaxed">
-                                {slide.desc}
-                            </p>
-                            <Link href={slide.ctaLink} className="inline-block">
-                                <button className="bg-brand-red hover:bg-red-600 text-white font-bold text-[10px] md:text-xs py-1.5 px-4 md:py-2 md:px-6 rounded-md shadow hover:shadow-red-500/40 transition-all">
-                                    {slide.ctaText}
-                                </button>
-                            </Link>
-                        </div>
+                        <Link
+                            href={slide.ctaLink || '/'}
+                            className="relative block w-full h-full"
+                            aria-label={slide.title || `Slide ${idx + 1}`}
+                        >
+                            <Image
+                                src={slide.imageUrl}
+                                alt={slide.title || `Slide ${idx + 1}`}
+                                fill
+                                unoptimized
+                                className="object-cover object-center"
+                                priority={idx === 0}
+                            />
+                        </Link>
                     </div>
                 ))}
                 <div className="absolute bottom-3 md:bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex gap-1.5 md:gap-2">

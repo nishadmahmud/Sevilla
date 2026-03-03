@@ -224,6 +224,7 @@ export default function CheckoutPage() {
             pay_mode: paymentMethod,
             paid_amount: 0,
             user_id: process.env.NEXT_PUBLIC_USER_ID,
+            // sub_total is items total only; delivery sent separately
             sub_total: subTotal,
             vat: 0,
             tax: 0,
@@ -242,11 +243,20 @@ export default function CheckoutPage() {
             delivery_customer_address: `${formData.address}, ${selectedCity}, ${selectedDistrict}`,
             delivery_customer_phone: formData.phone,
             delivery_fee: deliveryFee,
-            variants: [],
+            variants: cartItems
+                .map((item) => ({
+                    product_id: item.id,
+                    storage: item.variants?.storage || null,
+                    color: item.variants?.color || item.variants?.colors?.name || null,
+                    region: item.variants?.region || null,
+                }))
+                .filter((v) => v.storage || v.color || v.region),
             imeis: [null],
             created_at: new Date().toISOString(),
             customer_name: formData.firstName,
             customer_phone: formData.phone,
+            customer_email: formData.email || "",
+            coupon_code: appliedCoupon ? couponCode : "",
             sales_id: process.env.NEXT_PUBLIC_USER_ID,
             wholeseller_id: 1,
             status: 1,
@@ -556,12 +566,12 @@ export default function CheckoutPage() {
                                                             <span>{item.variants.storage}</span>
                                                         </>
                                                     )}
-                                                    {item.variants?.colors?.name && (
+                                                    {(item.variants?.color || item.variants?.colors?.name) && (
                                                         <>
                                                             <span>·</span>
                                                             <span className="flex items-center gap-1">
-                                                                <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: item.variants.colors.hex }}></span>
-                                                                {item.variants.colors.name}
+                                                                <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: item.variants?.colors?.hex }}></span>
+                                                                {item.variants?.color || item.variants?.colors?.name}
                                                             </span>
                                                         </>
                                                     )}

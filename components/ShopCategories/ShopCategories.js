@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiWind, FiThermometer, FiBox, FiDroplet, FiCoffee, FiHome, FiGrid, FiSettings, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import ProductCard from '../Shared/ProductCard';
 
-export default function ShopCategories() {
+export default function ShopCategories({ categories = [], flashSaleProducts = [] }) {
     // Countdown timer — starts at 23 Days 4h 4m 59s
     const [timeLeft, setTimeLeft] = useState(23 * 86400 + 4 * 3600 + 4 * 60 + 59);
 
@@ -23,7 +23,7 @@ export default function ShopCategories() {
     const seconds = String(timeLeft % 60).padStart(2, '0');
 
     // Layout ready to accept image URLs from the user
-    const categories = [
+    const defaultCategories = [
         { name: "Kitchen Chimneys", icon: <FiWind />, image: "" },
         { name: "Induction Cookers", icon: <FiThermometer />, image: "" },
         { name: "Gas Stoves", icon: <FiSettings />, image: "" },
@@ -42,13 +42,32 @@ export default function ShopCategories() {
         { name: "Accessories", icon: <FiSettings />, image: "" },
     ];
 
-    const flashSaleProducts = [
+    const displayCategories = categories && categories.length > 0
+        ? categories.map(cat => ({
+            name: cat.name,
+            icon: <FiGrid />, // Default fallback icon
+            image: cat.image_url || "",
+            slug: cat.category_id || cat.id || cat.name.toLowerCase().replace(/ /g, '-')
+        }))
+        : defaultCategories;
+
+    const fallbackFlashSaleProducts = [
         { id: 101, name: "sevilla 90cm Auto-Clean Chimney", price: "৳ 12,500", oldPrice: "৳ 18,000", discount: "-30%", imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600" },
         { id: 102, name: "Smart Induction Cooktop 2000W", price: "৳ 3,500", oldPrice: "৳ 5,000", discount: "-30%", imageUrl: "https://images.unsplash.com/photo-1590794055276-802cbb3e8c9b?q=80&w=600" },
         { id: 103, name: "3-Burner Glass Top Stove", price: "৳ 4,200", oldPrice: "৳ 5,500", discount: "-23%", imageUrl: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?q=80&w=600" },
         { id: 104, name: "Built-in Convection Oven", price: "৳ 25,000", oldPrice: "৳ 32,000", discount: "-21%", imageUrl: "https://images.unsplash.com/photo-1584288081692-74baeaed5b6c?q=80&w=600" },
         { id: 105, name: "Premium Water Purifier Plus", price: "৳ 15,000", oldPrice: "৳ 20,000", discount: "-25%", imageUrl: "https://images.unsplash.com/photo-1585863959955-e427d1a580a6?q=80&w=600" },
     ];
+
+    const displayFlashSaleProducts = flashSaleProducts?.length ? flashSaleProducts : fallbackFlashSaleProducts;
+    const flashRowRef = useRef(null);
+
+    const scrollFlashRow = (direction) => {
+        const el = flashRowRef.current;
+        if (!el) return;
+        const amount = Math.max(240, Math.floor(el.clientWidth * 0.9));
+        el.scrollBy({ left: direction * amount, behavior: 'smooth' });
+    };
 
     return (
         <section className="bg-white py-10 md:py-20 border-b border-gray-100">
@@ -60,10 +79,10 @@ export default function ShopCategories() {
                 </div>
 
                 <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-y-8 md:gap-y-12 gap-x-2 mb-16 md:mb-24">
-                    {categories.map((cat, idx) => (
+                    {displayCategories.map((cat, index) => (
                         <Link
-                            href={`/category/${cat.name.toLowerCase().replace(/ /g, '-')}`}
-                            key={idx}
+                            href={`/category/${cat.slug || cat.category_id || cat.id || cat.name.toLowerCase().replace(/ /g, '-')}`}
+                            key={cat.slug || index}
                             className="flex flex-col items-center justify-start gap-3 md:gap-4 text-center group"
                         >
                             <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center text-3xl md:text-4xl text-gray-700 group-hover:scale-110 transition-transform duration-300">
@@ -117,17 +136,37 @@ export default function ShopCategories() {
 
                     {/* Product Row */}
                     <div className="relative group">
-                        <button className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white shadow hover:shadow-md rounded-full flex items-center justify-center z-10 transition-colors text-gray-800 hidden md:flex">
+                        <button
+                            type="button"
+                            onClick={() => scrollFlashRow(-1)}
+                            className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white shadow hover:shadow-md rounded-full items-center justify-center z-10 transition-colors text-gray-800 hidden md:inline-flex"
+                            aria-label="Scroll flash sale left"
+                        >
                             <FiChevronLeft size={20} />
                         </button>
 
-                        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 overflow-hidden">
-                            {flashSaleProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} />
+                        <div
+                            ref={flashRowRef}
+                            className="flex gap-3 md:gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pr-3 md:pr-6"
+                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                        >
+                            <style jsx>{`div::-webkit-scrollbar { display: none; }`}</style>
+                            {displayFlashSaleProducts.map((product) => (
+                                <div
+                                    key={product.id}
+                                    className="w-[160px] sm:w-[180px] md:w-[200px] lg:w-[220px] shrink-0 snap-start"
+                                >
+                                    <ProductCard product={product} />
+                                </div>
                             ))}
                         </div>
 
-                        <button className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white shadow hover:shadow-md rounded-full flex items-center justify-center z-10 transition-colors text-gray-800 hidden md:flex">
+                        <button
+                            type="button"
+                            onClick={() => scrollFlashRow(1)}
+                            className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white shadow hover:shadow-md rounded-full items-center justify-center z-10 transition-colors text-gray-800 hidden md:inline-flex"
+                            aria-label="Scroll flash sale right"
+                        >
                             <FiChevronRight size={20} />
                         </button>
                     </div>

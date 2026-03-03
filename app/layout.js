@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import MobileBottomNav from "../components/MobileBottomNav/MobileBottomNav";
 import Providers from "../components/Providers";
+import { getCategoriesFromServer } from "../lib/api";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,19 +21,29 @@ export const metadata = {
   description: "Top quality kitchen chimneys, induction cookers, gas stoves, and more.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  let categories = [];
+  try {
+    const res = await getCategoriesFromServer();
+    if (res?.success && res?.data) {
+      categories = res.data;
+    }
+  } catch (error) {
+    console.error("Failed to fetch categories for header:", error);
+  }
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-800 pb-16 md:pb-0`}
       >
         <Providers>
-          <Header />
+          <Header categories={categories} />
           <main className="min-h-screen flex flex-col bg-white">
             {children}
           </main>
           <MobileBottomNav />
-          <Footer />
+          <Footer categories={categories} />
         </Providers>
       </body>
     </html>
