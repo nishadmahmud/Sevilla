@@ -42,6 +42,14 @@ function OrderSuccessContent() {
                     </div>
 
                     {/* Contact */}
+                    <Link
+                        href={`/track-order?invoice=${invoice}`}
+                        className="flex items-center justify-center gap-2 w-full py-3.5 mb-3 rounded-xl bg-brand-red text-white font-extrabold text-sm shadow-lg shadow-brand-red/25 hover:bg-[#ff1a2b] transition-all"
+                    >
+                        <Package className="w-4 h-4" />
+                        Track Your Order
+                    </Link>
+
                     <a
                         href="tel:+8801805738326"
                         className="flex items-center justify-center gap-2 w-full py-3 mb-3 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold text-sm hover:border-brand-red hover:text-brand-red transition-colors"
@@ -52,7 +60,7 @@ function OrderSuccessContent() {
 
                     <Link
                         href="/"
-                        className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-brand-red text-white font-extrabold text-sm shadow-lg shadow-brand-red/25 hover:bg-[#ff1a2b] transition-all"
+                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-gray-200 text-gray-700 font-semibold text-sm hover:border-gray-400 transition-colors"
                     >
                         <Home className="w-4 h-4" />
                         Back to Home
