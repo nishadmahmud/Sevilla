@@ -542,7 +542,7 @@ export default function CheckoutPage() {
                                         <div key={`${item.id}-${item.variantKey}-${index}`} className="flex gap-3">
                                             <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl border border-gray-100 bg-gray-50">
                                                 <Image
-                                                    src={item.images?.[0] || item.imageUrl || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400"}
+                                                    src={item.images?.[0] || item.imageUrl || "/no-image.svg"}
                                                     alt={item.name}
                                                     fill
                                                     unoptimized

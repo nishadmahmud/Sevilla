@@ -47,7 +47,15 @@ export function CartProvider({ children }) {
             }
 
             // Format parsed price to number for calculations
-            const cleanPrice = product.price ? parseFloat(product.price.replace(/[^\d]/g, "")) : 0;
+            // Prefer pre-supplied numericPrice, otherwise strip all non-digit/decimal characters
+            const cleanPrice =
+                typeof product.numericPrice === 'number' && product.numericPrice > 0
+                    ? product.numericPrice
+                    : typeof product.price === 'string'
+                        ? parseFloat(product.price.replace(/[^\d.]/g, '')) || 0
+                        : typeof product.price === 'number'
+                            ? product.price
+                            : 0;
 
             // New item
             return [

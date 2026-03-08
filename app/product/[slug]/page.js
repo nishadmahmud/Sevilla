@@ -145,10 +145,10 @@ export default function ProductDetailsPage() {
                 const variants =
                     storageOptions.length || colorOptions.length || regionOptions.length
                         ? {
-                              storage: storageOptions,
-                              colors: colorOptions,
-                              regions: regionOptions,
-                          }
+                            storage: storageOptions,
+                            colors: colorOptions,
+                            regions: regionOptions,
+                        }
                         : null;
 
                 const specs = `
@@ -165,6 +165,7 @@ export default function ProductDetailsPage() {
                     id: p.id,
                     name: p.name,
                     price: `৳ ${price.toLocaleString('en-IN')}`,
+                    numericPrice: price,
                     oldPrice: hasDiscount
                         ? `৳ ${Number(p.retails_price || basePrice || 0).toLocaleString('en-IN')}`
                         : defaultVariant?.oldPriceNumber
@@ -172,6 +173,7 @@ export default function ProductDetailsPage() {
                             : null,
                     discount: discountLabel,
                     images,
+                    imageUrl: images[0] || '/no-image.svg',
                     variants,
                     variantsMatrix: variantItems,
                     description: p.description || '',
@@ -190,8 +192,8 @@ export default function ProductDetailsPage() {
                     const relatedItems = Array.isArray(relatedPayload?.data)
                         ? relatedPayload.data
                         : Array.isArray(relatedPayload)
-                        ? relatedPayload
-                        : [];
+                            ? relatedPayload
+                            : [];
 
                     if (!cancelled) {
                         const mappedRelated = relatedItems.map((rp) => {
@@ -242,8 +244,8 @@ export default function ProductDetailsPage() {
         productData?.name ||
         (slug
             ? decodeURIComponent(slug)
-                  .replace(/-/g, ' ')
-                  .replace(/\b\w/g, (ch) => ch.toUpperCase())
+                .replace(/-/g, ' ')
+                .replace(/\b\w/g, (ch) => ch.toUpperCase())
             : 'Product');
 
     return (
@@ -268,49 +270,49 @@ export default function ProductDetailsPage() {
                     <div className="py-10 text-sm text-red-500">{error || 'Product not found.'}</div>
                 ) : (
                     <>
-                <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
+                        <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
 
-                    {/* Col 1: Gallery (40% on Desktop, 50% iPad) */}
-                    <div className="w-full md:w-1/2 lg:w-[40%] shrink-0">
-                        <ProductGallery
-                            images={productData.images}
-                            mainImage={mainImage}
-                            onChangeMainImage={setMainImage}
-                        />
-                    </div>
+                            {/* Col 1: Gallery (40% on Desktop, 50% iPad) */}
+                            <div className="w-full md:w-1/2 lg:w-[40%] shrink-0">
+                                <ProductGallery
+                                    images={productData.images}
+                                    mainImage={mainImage}
+                                    onChangeMainImage={setMainImage}
+                                />
+                            </div>
 
-                    {/* Col 2: Info (60% on Desktop, 50% iPad) */}
-                    <div className="w-full md:w-1/2 lg:w-[60%]">
-                        <ProductInfo
-                            product={productData}
-                            onVariantImageChange={(img) => {
-                                if (img) {
-                                    setMainImage(img);
-                                }
-                            }}
-                        />
-                    </div>
-                </div>
-
-                {/* Bottom: Tabs */}
-                <ProductTabs
-                    description={productData.description}
-                    specifications={productData.specifications}
-                />
-
-                {/* Related Products Section */}
-                {relatedProducts.length > 0 && (
-                    <div className="mt-16 md:mt-24 pt-12 border-t border-gray-200">
-                        <h2 className="text-2xl md:text-3xl font-extrabold text-[#1a3b34] mb-8 text-center md:text-left">
-                            Related Products
-                        </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
-                            {relatedProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} />
-                            ))}
+                            {/* Col 2: Info (60% on Desktop, 50% iPad) */}
+                            <div className="w-full md:w-1/2 lg:w-[60%]">
+                                <ProductInfo
+                                    product={productData}
+                                    onVariantImageChange={(img) => {
+                                        if (img) {
+                                            setMainImage(img);
+                                        }
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                )}
+
+                        {/* Bottom: Tabs */}
+                        <ProductTabs
+                            description={productData.description}
+                            specifications={productData.specifications}
+                        />
+
+                        {/* Related Products Section */}
+                        {relatedProducts.length > 0 && (
+                            <div className="mt-16 md:mt-24 pt-12 border-t border-gray-200">
+                                <h2 className="text-2xl md:text-3xl font-extrabold text-[#1a3b34] mb-8 text-center md:text-left">
+                                    Related Products
+                                </h2>
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+                                    {relatedProducts.map((product) => (
+                                        <ProductCard key={product.id} product={product} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </>
                 )}
             </div>

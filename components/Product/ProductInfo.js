@@ -110,6 +110,7 @@ export default function ProductInfo({ product, onVariantImageChange }) {
         const productForCart = {
             ...product,
             price: effectivePrice,
+            numericPrice: priceNumber,
             oldPrice: effectiveOldPrice,
         };
 
@@ -164,11 +165,10 @@ export default function ProductInfo({ product, onVariantImageChange }) {
                                     key={size}
                                     onClick={() => !isOptionDisabled('storage', size) && setSelectedStorage(size)}
                                     disabled={isOptionDisabled('storage', size)}
-                                    className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${
-                                        selectedStorage === size
+                                    className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${selectedStorage === size
                                             ? 'border-brand-red bg-brand-red text-white'
                                             : 'border-gray-200 text-gray-600 hover:border-brand-red'
-                                    } ${isOptionDisabled('storage', size) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                                        } ${isOptionDisabled('storage', size) ? 'opacity-40 cursor-not-allowed' : ''}`}
                                 >
                                     {size}
                                 </button>
@@ -187,11 +187,10 @@ export default function ProductInfo({ product, onVariantImageChange }) {
                                     key={color.name}
                                     onClick={() => !isOptionDisabled('color', color.name) && setSelectedColorName(color.name)}
                                     disabled={isOptionDisabled('color', color.name)}
-                                    className={`cursor-pointer flex items-center gap-2 px-3 py-2 rounded-lg border-2 transition-all ${
-                                        selectedColorName === color.name
+                                    className={`cursor-pointer flex items-center gap-2 px-3 py-2 rounded-lg border-2 transition-all ${selectedColorName === color.name
                                             ? 'border-brand-red bg-red-50'
                                             : 'border-gray-200 hover:border-gray-300'
-                                    } ${isOptionDisabled('color', color.name) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                                        } ${isOptionDisabled('color', color.name) ? 'opacity-40 cursor-not-allowed' : ''}`}
                                 >
                                     <span
                                         className="w-4 h-4 rounded-full border border-gray-200 shadow-sm"
@@ -216,11 +215,10 @@ export default function ProductInfo({ product, onVariantImageChange }) {
                                     key={region}
                                     onClick={() => !isOptionDisabled('region', region) && setSelectedRegion(region)}
                                     disabled={isOptionDisabled('region', region)}
-                                    className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${
-                                        selectedRegion === region
+                                    className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all ${selectedRegion === region
                                             ? 'border-brand-red text-brand-red bg-red-50/30'
                                             : 'border-gray-200 text-gray-600 hover:border-brand-red'
-                                    } ${isOptionDisabled('region', region) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                                        } ${isOptionDisabled('region', region) ? 'opacity-40 cursor-not-allowed' : ''}`}
                                 >
                                     {region}
                                 </button>

@@ -71,8 +71,8 @@ function Pagination({ currentPage, lastPage, total, perPage }) {
                             key={page}
                             onClick={() => goTo(page)}
                             className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-200 ${page === currentPage
-                                    ? 'bg-brand-red text-white shadow-lg shadow-brand-red/30 scale-105'
-                                    : 'bg-white border border-gray-200 text-gray-600 hover:border-brand-red hover:text-brand-red'
+                                ? 'bg-brand-red text-white shadow-lg shadow-brand-red/30 scale-105'
+                                : 'bg-white border border-gray-200 text-gray-600 hover:border-brand-red hover:text-brand-red'
                                 }`}
                         >
                             {page}
@@ -102,10 +102,12 @@ function CategoryProductCard({ product, view }) {
 
     const handleAddToCart = (e) => {
         e.preventDefault();
+        const numericPrice = parseFloat(String(product.price || '').replace(/[^\d.]/g, '')) || 0;
         addToCart({
             id: product.id,
             name: product.name,
             price: product.price,
+            numericPrice,
             imageUrl: product.imageUrl,
         });
     };

@@ -93,7 +93,7 @@ export default function CartSidebar() {
                                         {/* Image */}
                                         <div className="w-20 h-20 bg-gray-50 rounded-xl overflow-hidden shrink-0 border border-gray-100 relative">
                                             <Image
-                                                src={item.images?.[0] || item.imageUrl || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400"}
+                                                src={item.images?.[0] || item.imageUrl || "/no-image.svg"}
                                                 alt={item.name}
                                                 fill
                                                 unoptimized
