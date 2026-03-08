@@ -35,9 +35,9 @@ export default function ContactPage() {
                     {/* Contact Info */}
                     <div className="lg:col-span-2 space-y-4">
                         {[
-                            { icon: <FiMapPin size={20} />, title: "Visit Us", text: "Level-4, Block-C, Shop #35A,\nJamuna Future Park, Dhaka-1229" },
-                            { icon: <FiPhone size={20} />, title: "Call Us", text: "+880 1714-404100", href: "tel:+8801714404100" },
-                            { icon: <FiMail size={20} />, title: "Email Us", text: "support@sevillabd.com", href: "mailto:support@sevillabd.com" },
+                            { icon: <FiMapPin size={20} />, title: "Visit Us", text: "BA - 64/3 South Badda,\nDhaka - 1212" },
+                            { icon: <FiPhone size={20} />, title: "Call Us", text: "+880 1805-738326", href: "tel:+8801805738326" },
+                            { icon: <FiMail size={20} />, title: "Email Us", text: "sevilla.agt@gmail.com", href: "mailto:sevilla.agt@gmail.com" },
                             { icon: <FiClock size={20} />, title: "Business Hours", text: "Sat–Thu: 10 AM – 9 PM\nFri: 2 PM – 9 PM" },
                         ].map((item, i) => (
                             <div key={i} className="bg-white rounded-xl p-5 shadow-sm hover:shadow-lg transition-all flex gap-4 items-start">
@@ -58,8 +58,8 @@ export default function ContactPage() {
                             <h3 className="font-bold text-gray-900 text-sm mb-3">Connect With Us</h3>
                             <div className="flex gap-3">
                                 <a href="https://facebook.com/sevilla.bd" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-100 transition-colors"><FaFacebook size={20} /></a>
-                                <a href="https://wa.me/8801714404100" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center hover:bg-green-100 transition-colors"><FaWhatsapp size={20} /></a>
-                                <a href="mailto:support@sevillabd.com" className="w-10 h-10 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-100 transition-colors"><FiMail size={20} /></a>
+                                <a href="https://wa.me/8801805738326" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center hover:bg-green-100 transition-colors"><FaWhatsapp size={20} /></a>
+                                <a href="mailto:sevilla.agt@gmail.com" className="w-10 h-10 bg-red-50 text-red-600 rounded-lg flex items-center justify-center hover:bg-red-100 transition-colors"><FiMail size={20} /></a>
                             </div>
                         </div>
                     </div>

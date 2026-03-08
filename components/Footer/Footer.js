@@ -28,11 +28,11 @@ export default function Footer({ categories = [] }) {
                         <div className="flex flex-col gap-1.5 md:gap-2 text-[10px] md:text-sm text-white/90">
                             <p className="flex gap-1 md:gap-2">
                                 <strong className="text-white">Address:</strong>
-                                <span>Level-4, Block-C, Shop #35A, Jamuna Future Park</span>
+                                <span>BA - 64/3 South Badda, Dhaka - 1212</span>
                             </p>
                             <p className="flex gap-1 md:gap-2">
                                 <strong className="text-white">Phone:</strong>
-                                <a href="tel:+8801714404100" className="hover:text-white/70 transition-colors">+8801714404100</a>
+                                <a href="tel:+8801805738326" className="hover:text-white/70 transition-colors">+880 1805-738326</a>
                             </p>
                         </div>
                         <div className="flex gap-3 md:gap-4 mt-1">
@@ -90,11 +90,11 @@ export default function Footer({ categories = [] }) {
             <div className="border-t border-white/10 bg-gray-900">
                 <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-[9px] md:text-xs font-medium text-gray-400">
                     <p>&copy; {new Date().getFullYear()} sevilla. All rights reserved.</p>
-                        <div className="flex gap-4 md:gap-6">
-                            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-                            <Link href="/refund" className="hover:text-white transition-colors">Refund</Link>
-                        </div>
+                    <div className="flex gap-4 md:gap-6">
+                        <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                        <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+                        <Link href="/refund" className="hover:text-white transition-colors">Refund</Link>
+                    </div>
                 </div>
             </div>
         </footer>

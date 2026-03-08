@@ -61,7 +61,7 @@ export default function RefundPage() {
                     <h2 className="text-xl font-bold text-gray-900 mb-4">How to Request a Refund</h2>
                     <div className="space-y-4 mb-8">
                         {[
-                            { step: 1, title: "Contact Us", desc: "Call us at +880 1714-404100 or email support@sevilla.com.bd with your order details and reason for return.", color: "from-blue-500 to-blue-600" },
+                            { step: 1, title: "Contact Us", desc: "Call us at +880 1805-738326 or email sevilla.agt@gmail.com with your order details and reason for return.", color: "from-blue-500 to-blue-600" },
                             { step: 2, title: "Get Approval", desc: "Our team will review your request and provide a Return Authorization (RA) number within 24 hours.", color: "from-indigo-500 to-purple-600" },
                             { step: 3, title: "Ship the Product", desc: "Pack the item securely in its original packaging and ship it to our store address. Include the RA number with your return.", color: "from-brand-red to-red-500" },
                             { step: 4, title: "Receive Refund", desc: "Once we receive and inspect the product, your refund will be processed within 7-10 business days.", color: "from-green-500 to-emerald-600" },
