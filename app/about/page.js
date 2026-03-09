@@ -4,7 +4,7 @@ import { Target, Handshake, Rocket, Smartphone, Laptop, ShoppingCart, Wrench } f
 
 export const metadata = {
     title: "About Us | sevilla",
-    description: "Learn about sevilla — Bangladesh's most trusted premium kitchen appliance store at Jamuna Future Park, Dhaka.",
+    description: "Learn about sevilla — Bangladesh's most trusted premium kitchen appliance store at South Badda, Dhaka.",
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
                     <span className="inline-block px-4 py-1.5 bg-brand-red/20 text-brand-red text-xs font-bold rounded-full mb-4 border border-brand-red/20">ABOUT US</span>
                     <h1 className="text-3xl md:text-5xl font-extrabold mb-4">We Curate. We Install. <span className="text-brand-red">We Care.</span></h1>
                     <p className="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
-                        sevilla is Bangladesh's trusted destination for premium kitchen appliances. Located at Jamuna Future Park, Dhaka — we&apos;ve been serving thousands of happy customers with top-tier products and professional installation services.
+                        sevilla is Bangladesh's trusted destination for premium kitchen appliances. Located at South Badda, Dhaka — we&apos;ve been serving thousands of happy customers with top-tier products and professional installation services.
                     </p>
                 </div>
             </div>
@@ -82,21 +82,21 @@ export default function AboutPage() {
                                 <FiMapPin className="text-brand-red mt-1 flex-shrink-0" size={20} />
                                 <div>
                                     <p className="font-semibold">Address</p>
-                                    <p className="text-white/70 text-sm">Level-4, Block-C, Shop #35A, Jamuna Future Park, Dhaka-1229</p>
+                                    <p className="text-white/70 text-sm">BA - 64/3 South Badda, Dhaka - 1212</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
                                 <FiPhone className="text-brand-red mt-1 flex-shrink-0" size={20} />
                                 <div>
                                     <p className="font-semibold">Phone</p>
-                                    <a href="tel:+8801714404100" className="text-white/70 text-sm hover:text-white">+880 1714-404100</a>
+                                    <a href="tel:+8801805738326" className="text-white/70 text-sm hover:text-white">+8801805738326</a>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
                                 <FiMail className="text-brand-red mt-1 flex-shrink-0" size={20} />
                                 <div>
                                     <p className="font-semibold">Email</p>
-                                    <a href="mailto:support@sevilla.com.bd" className="text-white/70 text-sm hover:text-white">support@sevilla.com.bd</a>
+                                    <a href="mailto:support@sevilla.com.bd" className="text-white/70 text-sm hover:text-white">sevilla.agt@gmail.com</a>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
