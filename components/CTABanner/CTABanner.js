@@ -14,7 +14,7 @@ export default function CTABanner() {
                         <Link href="/book-repair" className="inline-flex items-center justify-center gap-1.5 md:gap-2 bg-white text-brand-red font-bold py-2 md:py-3 px-4 md:px-8 rounded-lg hover:bg-gray-50 transition-colors shadow-lg text-xs md:text-base">
                             Book Service <FiArrowRight />
                         </Link>
-                        <a href="tel:+8801714404100" className="inline-flex items-center justify-center gap-1.5 md:gap-2 bg-white/10 text-white font-bold py-2 md:py-3 px-4 md:px-8 rounded-lg border border-white/30 hover:bg-white/20 transition-colors text-xs md:text-base">
+                        <a href="tel:+8801805738326" className="inline-flex items-center justify-center gap-1.5 md:gap-2 bg-white/10 text-white font-bold py-2 md:py-3 px-4 md:px-8 rounded-lg border border-white/30 hover:bg-white/20 transition-colors text-xs md:text-base">
                             <FiPhone /> Call Us
                         </a>
                     </div>
