@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from 'react';
 import ProductCard from '../Shared/ProductCard';
@@ -8,8 +8,8 @@ export default function DiscountedParts() {
 
     const tabs = ['Chimneys', 'Cookers'];
 
-    const batteryImage = "https://images.unsplash.com/photo-1588854337236-6889d631faa8?q=80&w=1095&auto=format&fit=crop";
-    const screenImage = "https://images.unsplash.com/photo-1585863959955-e427d1a580a6?q=80&w=400";
+    const batteryImage = "/no-image.svg";
+    const screenImage = "/no-image.svg";
 
     const products = {
         'Chimneys': [
@@ -71,3 +71,4 @@ export default function DiscountedParts() {
         </section>
     );
 }
+

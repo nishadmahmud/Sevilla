@@ -22,15 +22,7 @@ export default function Header({ categories = [] }) {
   const { user, openAuthModal } = useAuth();
   const router = useRouter();
 
-  const defaultCategories = [
-    { name: "Kitchen Chimneys", slug: "chimneys" },
-    { name: "Induction Cookers", slug: "induction" },
-    { name: "Gas Stoves", slug: "stoves" },
-    { name: "Built-in Ovens", slug: "ovens" },
-    { name: "Accessories", slug: "accessories" }
-  ];
-
-  const displayCategories = categories && categories.length > 0 ? categories : defaultCategories;
+  const displayCategories = Array.isArray(categories) ? categories : [];
 
   const handleUserClick = () => {
     if (user) {
@@ -260,15 +252,19 @@ export default function Header({ categories = [] }) {
         <div className="hidden md:block bg-white py-3 text-sm border-b border-gray-100 shadow-sm relative z-40">
           <div className="max-w-7xl mx-auto flex gap-6 px-6 overflow-x-auto whitespace-nowrap items-center" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <span className="font-bold text-gray-500 text-sm">Categories:</span>
-            {displayCategories.slice(0, 7).map((cat, idx) => (
-              <Link
-                key={idx}
-                href={`/category/${cat.category_id || cat.id || cat.slug || cat.name.toLowerCase().replace(/ /g, '-')}`}
-                className="text-gray-700 font-medium hover:text-brand-red transition-colors"
-              >
-                {cat.name}
-              </Link>
-            ))}
+            {displayCategories.length > 0 ? (
+              displayCategories.slice(0, 7).map((cat, idx) => (
+                <Link
+                  key={idx}
+                  href={`/category/${cat.category_id || cat.id || cat.slug || cat.name.toLowerCase().replace(/ /g, '-')}`}
+                  className="text-gray-700 font-medium hover:text-brand-red transition-colors"
+                >
+                  {cat.name}
+                </Link>
+              ))
+            ) : (
+              <span className="text-gray-400 text-sm">No categories available right now.</span>
+            )}
             <Link href="/offer" className="text-brand-red font-bold hover:opacity-80 transition-opacity ml-auto">Special Offers</Link>
           </div>
         </div>
@@ -352,16 +348,20 @@ export default function Header({ categories = [] }) {
           <div className="px-4 py-3 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider mt-2 flex items-center gap-2">
             <FiGrid /> Categories
           </div>
-          {displayCategories.map((cat, idx) => (
-            <Link
-              key={idx}
-              href={`/category/${cat.category_id || cat.id || cat.slug || cat.name.toLowerCase().replace(/ /g, '-')}`}
-              onClick={closeSidebar}
-              className="flex items-center justify-between px-5 py-3 text-sm text-gray-600 border-b border-gray-50 hover:text-brand-red hover:bg-red-50/30"
-            >
-              <span>{cat.name}</span><FiChevronRight size={14} className="text-gray-400" />
-            </Link>
-          ))}
+          {displayCategories.length > 0 ? (
+            displayCategories.map((cat, idx) => (
+              <Link
+                key={idx}
+                href={`/category/${cat.category_id || cat.id || cat.slug || cat.name.toLowerCase().replace(/ /g, '-')}`}
+                onClick={closeSidebar}
+                className="flex items-center justify-between px-5 py-3 text-sm text-gray-600 border-b border-gray-50 hover:text-brand-red hover:bg-red-50/30"
+              >
+                <span>{cat.name}</span><FiChevronRight size={14} className="text-gray-400" />
+              </Link>
+            ))
+          ) : (
+            <p className="px-5 py-3 text-sm text-gray-400">No categories available right now.</p>
+          )}
         </div>
 
       </div>

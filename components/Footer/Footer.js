@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
 
 export default function Footer({ categories = [] }) {
     const dynamicCategories = Array.isArray(categories) ? categories.slice(0, 4) : [];
@@ -36,9 +36,7 @@ export default function Footer({ categories = [] }) {
                             </p>
                         </div>
                         <div className="flex gap-3 md:gap-4 mt-1">
-                            <a href="https://facebook.com/sevilla.bd" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="Facebook"><FaFacebook size={18} /></a>
-                            <a href="https://instagram.com/sevilla.bd" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="Instagram"><FaInstagram size={18} /></a>
-                            <a href="https://youtube.com/@sevillabd" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="YouTube"><FaYoutube size={18} /></a>
+                            <a href="https://www.facebook.com/share/1Ajg1eE4xL/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="Facebook"><FaFacebook size={18} /></a>
                         </div>
                     </div>
 

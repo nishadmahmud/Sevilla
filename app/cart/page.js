@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -66,7 +66,7 @@ export default function CartPage() {
                       src={
                         item.images?.[0] ||
                         item.imageUrl ||
-                        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400"
+                        "/no-image.svg"
                       }
                       alt={item.name}
                       fill
@@ -122,11 +122,11 @@ export default function CartPage() {
                     <div className="flex items-end justify-between mt-2 md:mt-3">
                       <div className="flex flex-col">
                         <span className="text-sm md:text-lg font-extrabold text-gray-900">
-                          ৳
+                          à§³
                           {(item.numericPrice * item.quantity).toLocaleString()}
                         </span>
                         <span className="text-[10px] md:text-xs text-gray-400">
-                          ৳{item.numericPrice.toLocaleString()} each
+                          à§³{item.numericPrice.toLocaleString()} each
                         </span>
                       </div>
 
@@ -174,7 +174,7 @@ export default function CartPage() {
               <div className="flex justify-between items-center mb-2 text-sm md:text-base">
                 <span className="text-gray-600">Subtotal</span>
                 <span className="font-extrabold text-gray-900">
-                  ৳{cartTotal.toLocaleString()}
+                  à§³{cartTotal.toLocaleString()}
                 </span>
               </div>
               <p className="text-[11px] md:text-xs text-gray-400 mb-4">
@@ -199,4 +199,5 @@ export default function CartPage() {
     </div>
   );
 }
+
 

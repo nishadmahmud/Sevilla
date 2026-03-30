@@ -1,57 +1,45 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Hero({ slides: apiSlides = [] }) {
+    const slides = (Array.isArray(apiSlides) ? apiSlides : []).filter((slide) => slide?.imageUrl);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const defaultSlides = [
-        {
-            id: 1,
-            badge: "Premium Italian Design",
-            title: "Upgrade Your Kitchen",
-            desc: "Discover state-of-the-art kitchen chimneys and induction cookers.",
-            ctaText: "Shop Now",
-            ctaLink: "/shop",
-            imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1170&auto=format&fit=crop"
-        },
-        {
-            id: 2,
-            badge: "Free Installation",
-            title: "Professional Service",
-            desc: "Get your new appliances installed by certified experts at no extra cost.",
-            ctaText: "Learn More",
-            ctaLink: "/services",
-            imageUrl: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?q=80&w=1170&auto=format&fit=crop"
-        },
-        {
-            id: 4,
-            badge: "Exclusive Offers",
-            title: "Up to 30% Off Chimneys",
-            desc: "Keep your kitchen fresh with our premium range of silent chimneys.",
-            ctaText: "View Offers",
-            ctaLink: "/category/chimneys",
-            imageUrl: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1170&auto=format&fit=crop"
-        }
-    ];
-
-    const slides = apiSlides && apiSlides.length ? apiSlides : defaultSlides;
-
     useEffect(() => {
+        if (slides.length <= 1) return;
+
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
         }, 5000);
+
         return () => clearInterval(timer);
     }, [slides.length]);
+
+    useEffect(() => {
+        if (currentSlide >= slides.length) {
+            setCurrentSlide(0);
+        }
+    }, [currentSlide, slides.length]);
+
+    if (!slides.length) {
+        return (
+            <section className="w-full bg-white py-2 md:py-8 px-3 md:px-6">
+                <div className="max-w-7xl mx-auto rounded-xl h-[220px] sm:h-[320px] md:h-[500px] shadow-sm border border-dashed border-gray-200 bg-gray-50 flex items-center justify-center text-sm text-gray-500 text-center p-6">
+                    Slider content is not available right now.
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="w-full bg-white py-2 md:py-8 px-3 md:px-6">
             <div className="max-w-7xl mx-auto relative overflow-hidden rounded-xl h-[220px] sm:h-[320px] md:h-[500px] shadow-lg border border-gray-100">
                 {slides.map((slide, idx) => (
                     <div
-                        key={slide.id}
+                        key={slide.id || idx}
                         className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${currentSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                     >
                         <Link
