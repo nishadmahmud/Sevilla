@@ -25,13 +25,13 @@ export default async function Home() {
   let blogPosts = [];
   let homeBanners = [];
 
-  const toMoney = (v) => `à§³ ${Number(v || 0).toLocaleString("en-IN")}`;
+  const toMoney = (v) => `৳ ${Number(v || 0).toLocaleString("en-IN")}`;
   const normalizeDiscount = (discount, type) => {
     const d = Number(discount || 0);
     if (!d || d <= 0) return null;
     return String(type).toLowerCase() === "percentage"
       ? `-${d}%`
-      : `à§³ ${d.toLocaleString("en-IN")}`;
+      : `৳ ${d.toLocaleString("en-IN")}`;
   };
   try {
     const res = await getCategoriesFromServer();
@@ -114,7 +114,7 @@ export default async function Home() {
         const descParts = [];
         if (p.brands?.name) descParts.push(p.brands.name);
         if (p.status) descParts.push(p.status);
-        if (savingsValue > 0) descParts.push(`Save à§³ ${savingsValue.toLocaleString("en-IN")}`);
+        if (savingsValue > 0) descParts.push(`Save ৳ ${savingsValue.toLocaleString("en-IN")}`);
 
         const slugName = pp.name ? pp.name.toLowerCase().replace(/\s+/g, "-") : "product";
         const slugWithId = pp.id ? `${slugName}-${pp.id}` : slugName;
@@ -122,10 +122,10 @@ export default async function Home() {
         return {
           id: pp.id,
           title: pp.name,
-          description: descParts.join(" â€¢ ") || "Limited time offer.",
+          description: descParts.join(" • ") || "Limited time offer.",
           price: pp.price,
           oldPrice: pp.oldPrice,
-          savings: savingsValue > 0 ? `Save à§³ ${savingsValue.toLocaleString("en-IN")}` : null,
+          savings: savingsValue > 0 ? `Save ৳ ${savingsValue.toLocaleString("en-IN")}` : null,
           imageUrl: pp.imageUrl,
           badge,
           link: `/product/${slugWithId}`,
@@ -184,7 +184,7 @@ export default async function Home() {
           .replace(/\s+/g, " ")
           .trim();
         const excerpt =
-          text.length > 140 ? `${text.slice(0, 140).trimEnd()}â€¦` : text;
+          text.length > 140 ? `${text.slice(0, 140).trimEnd()}…` : text;
 
         return {
           id: b.id,
@@ -212,45 +212,29 @@ export default async function Home() {
   }
   try {
     const sliderRes = await getSlidersFromServer();
-    const sliderItems = sliderRes?.success ? sliderRes.data : null;
-    if (Array.isArray(sliderItems) && sliderItems.length) {
-      heroSlides = sliderItems.flatMap((s) => {
-        const images = Array.isArray(s.image_path)
-          ? s.image_path
-          : s.image_path
-          ? [s.image_path]
-          : [];
-        const products = Array.isArray(s.products) ? s.products : [];
+    const sliderItems = Array.isArray(sliderRes?.sliders)
+      ? sliderRes.sliders
+      : Array.isArray(sliderRes?.data)
+      ? sliderRes.data
+      : [];
 
-        return images.map((img, idx) => {
-          const product = products[idx] || products[0] || null;
-          const title = product?.name || "Featured Gadget";
-          const price = product?.retails_price;
-          const categoryId = product?.category_id;
+    heroSlides = sliderItems
+      .filter((s) => s?.image_path && Number(s?.status ?? 1) === 1)
+      .map((s) => {
+        const rawLink = typeof s.link === "string" ? s.link.trim() : "";
+        const ctaLink = rawLink
+          ? /^https?:\/\//i.test(rawLink)
+            ? rawLink
+            : `https://${rawLink}`
+          : "/";
 
-          const ctaLink =
-            categoryId != null
-              ? `/category/${categoryId}`
-              : "/shop";
-
-          const descParts = [];
-          if (product?.brand_name) descParts.push(product.brand_name);
-          if (product?.category_name) descParts.push(product.category_name);
-          if (price) descParts.push(`Starting from à§³ ${Number(price).toLocaleString("en-IN")}`);
-
-          return {
-            id: `${s.id}-${idx}`,
-            badge: "Featured",
-            title,
-            desc:
-              descParts.join(" â€¢ ") || "Discover our latest arrivals and best-selling gadgets.",
-            ctaText: "Shop Now",
-            ctaLink,
-            imageUrl: img,
-          };
-        });
+        return {
+          id: s.id,
+          title: s.title || "Slide",
+          ctaLink,
+          imageUrl: s.image_path,
+        };
       });
-    }
   } catch (error) {
     console.error("Failed to fetch sliders:", error);
   }
@@ -280,4 +264,5 @@ export default async function Home() {
     </>
   );
 }
+
 

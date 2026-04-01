@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -146,7 +146,7 @@ export default function Header({ categories = [] }) {
 
   return (
     <>
-      <header className="w-full shadow-sm sticky top-0 z-50 bg-white">
+      <header className="w-full shadow-sm sticky top-0 z-50 bg-white overflow-x-clip">
         {/* Top Bar - Hidden on mobile */}
         <div className="bg-gray-900 text-gray-300 text-xs py-2 hidden md:block">
           <div className="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-6">
@@ -165,7 +165,7 @@ export default function Header({ categories = [] }) {
 
         {/* Main Navigation */}
         <div className="bg-brand-red py-2 md:py-4">
-          <div className="max-w-7xl mx-auto flex justify-between items-center px-3 md:px-6 gap-2 md:gap-4">
+          <div className="max-w-7xl mx-auto flex justify-between items-center px-2 md:px-6 gap-1 md:gap-4 min-w-0">
 
             {/* Logo */}
             <Link href="/" className="flex flex-row items-center shrink-0 border border-white bg-white h-8 md:h-10">
@@ -180,7 +180,7 @@ export default function Header({ categories = [] }) {
             {/* Global Search Bar (Mobile & Desktop) */}
             <form
               onSubmit={handleSearchSubmit}
-              className="grow flex items-center bg-gray-50 md:bg-white rounded-full px-3 md:px-4 py-1.5 md:py-2 shadow-sm focus-within:ring-2 focus-within:ring-white/50 transition-all mx-1 md:mx-4"
+              className="flex-1 min-w-0 flex items-center bg-gray-50 md:bg-white rounded-full px-2 md:px-4 py-1.5 md:py-2 shadow-sm focus-within:ring-2 focus-within:ring-white/50 transition-all mx-0 md:mx-4"
             >
               <button
                 type="submit"
@@ -192,13 +192,13 @@ export default function Header({ categories = [] }) {
               <input
                 type="text"
                 placeholder="Search gadget"
-                className="grow bg-transparent border-none outline-none text-[13px] md:text-sm text-gray-800 min-w-0"
+                className="grow bg-transparent border-none outline-none text-base md:text-sm text-gray-800 min-w-0"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 type="button"
-                className="text-gray-400 hover:text-brand-red transition-colors flex items-center justify-center p-1 shrink-0 border-l border-gray-200 ml-2 pl-2 md:border-none md:ml-0 md:pl-0"
+                className="hidden sm:flex text-gray-400 hover:text-brand-red transition-colors items-center justify-center p-1 shrink-0 border-l border-gray-200 ml-2 pl-2 md:border-none md:ml-0 md:pl-0"
               >
                 <FiMic size={16} />
               </button>

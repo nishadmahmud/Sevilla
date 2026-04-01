@@ -1,11 +1,13 @@
-"use client";
+﻿"use client";
 
 import Link from 'next/link';
-import { FaFacebook } from 'react-icons/fa';
+import { FaFacebook, FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer({ categories = [] }) {
     const dynamicCategories = Array.isArray(categories) ? categories.slice(0, 4) : [];
+    const whatsappLink = "https://wa.me/8801805738326";
     return (
+        <>
         <footer className="bg-brand-red border-t border-brand-red/50 text-white/90 mt-auto">
             <div className="max-w-7xl mx-auto px-3 md:px-6 py-8 md:py-16">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 lg:gap-8 mb-8 md:mb-12">
@@ -37,6 +39,7 @@ export default function Footer({ categories = [] }) {
                         </div>
                         <div className="flex gap-3 md:gap-4 mt-1">
                             <a href="https://www.facebook.com/share/1Ajg1eE4xL/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="Facebook"><FaFacebook size={18} /></a>
+                            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 transition-colors" aria-label="WhatsApp"><FaWhatsapp size={18} /></a>
                         </div>
                     </div>
 
@@ -87,7 +90,12 @@ export default function Footer({ categories = [] }) {
             {/* Bottom Legal Bar */}
             <div className="border-t border-white/10 bg-gray-900">
                 <div className="max-w-7xl mx-auto px-3 md:px-6 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-[9px] md:text-xs font-medium text-gray-400">
-                    <p>&copy; {new Date().getFullYear()} sevilla. All rights reserved.</p>
+                    <div className="flex flex-col items-center md:items-start gap-1">
+                        <p>&copy; {new Date().getFullYear()} sevilla. All rights reserved.</p>
+                        <p>
+                            Developed by <a href="https://squadinnovators.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Squad Innovators</a>
+                        </p>
+                    </div>
                     <div className="flex gap-4 md:gap-6">
                         <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                         <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
@@ -96,5 +104,18 @@ export default function Footer({ categories = [] }) {
                 </div>
             </div>
         </footer>
+        <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="fixed z-50 w-12 h-12 md:w-14 md:h-14 rounded-full bg-green-500 text-white shadow-xl flex items-center justify-center hover:bg-green-600 transition-colors"
+            style={{ right: 40, bottom: 120 }}
+        >
+            <FaWhatsapp size={26} />
+        </a>
+        </>
     );
 }
+
+

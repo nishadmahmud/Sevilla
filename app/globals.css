@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @theme {
   --color-brand-red: #e31e24;
@@ -23,4 +23,7 @@ body {
   background-color: #ffffff;
   color: #1f2937;
   /* Tailwind gray-800 */
+}
+html, body {
+  overflow-x: hidden;
 }
